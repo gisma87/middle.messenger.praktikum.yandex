@@ -1,0 +1,11 @@
+{
+  "rules": {
+    "number-leading-zero": null,
+    "selector-type-no-unknown": true,
+    "string-no-newline": true,
+    "block-no-empty": true,
+    "max-empty-lines": 1,
+    "max-line-length": 90
+  },
+  "ignoreFiles": ["build/*"]
+}

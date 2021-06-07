@@ -1,0 +1,26 @@
+{
+  "env": {
+    "es2021": true,
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "max-len": [1, 500],
+    "max-params": [2, 3],
+    "no-multi-spaces": "error",
+    "space-in-parens": "error",
+    "no-multiple-empty-lines": "error",
+    "prefer-const": "error",
+    //    "no-use-before-define": "warn",
+    "no-debugger": "off",
+    "no-console": 0,
+    "require-jsdoc": 0
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaVersion": 2020,
+    "allowImportExportEverywhere": true
+  },
+  "plugins": ["html", "@typescript-eslint"]
+}
