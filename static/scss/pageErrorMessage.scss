@@ -1,0 +1,41 @@
+@import 'variables';
+@import './my-reset.scss';
+@import './fonts.scss';
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.pageErrorMessage {
+  font-family: $primary-font;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  min-height: 150px;
+
+  &__title {
+    font-size: 4rem;
+    font-weight: 500;
+  }
+
+  &__text {
+    font-size: 1.5rem;
+    margin: 20px 0 40px;
+  }
+
+  &__link {
+    font-size: 1.2rem;
+    color: #3369f3;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

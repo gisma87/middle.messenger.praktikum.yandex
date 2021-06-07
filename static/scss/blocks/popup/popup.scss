@@ -1,0 +1,16 @@
+.popup {
+  position: absolute;
+  background: #fff;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+  border-radius: 12px;
+  list-style-type: none;
+  padding: 5px 12px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  cursor: default;
+
+  &_visible {
+    opacity: 1;
+    z-index: 6;
+  }
+}

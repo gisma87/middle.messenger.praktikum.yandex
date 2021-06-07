@@ -1,0 +1,164 @@
+@import 'mixins';
+@import 'variables';
+
+@import './my-reset.scss';
+@import './fonts.scss';
+@import './blocks/buttonPrimary/buttonPrimary.scss';
+@import './blocks/popup/popup.scss';
+@import './blocks/popupForm/popupForm.scss';
+@import './blocks/form/form.scss';
+@import './blocks/backdrop/backdrop.scss';
+
+.profile {
+  @include mainBlock();
+
+  &__btnBack {
+    min-height: 100%;
+    max-width: 64px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fbfbfb;
+  }
+
+  &__imgBtnBack {
+    display: inline-block;
+    padding: 10px;
+    background: $primary-color;
+    color: #fff;
+    transform: rotate(180deg);
+    border-radius: 50%;
+  }
+
+  &__container {
+    padding-top: 60px;
+    width: 100%;
+  }
+
+  &__content {
+    max-width: 340px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  &__photoContainer {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: #efefef;
+    margin-bottom: 21px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__photo {
+    font-size: 42px;
+    color: $secondary-font-color;
+  }
+
+  &__avatar {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+  }
+
+  &__photoChangeLayer {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    padding: 15px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &__name {
+    text-align: center;
+    padding-bottom: 30px;
+  }
+
+  &__list {
+    list-style-type: none;
+    width: 100%;
+    padding: 30px 0 20px;
+  }
+
+  &__item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eaeaea;
+
+    &:last-child {
+      border: none;
+    }
+
+    &.form__errorMessage_visible {
+      border-bottom: 1px solid red;
+    }
+  }
+
+  &__itemTitle {
+    font-size: 0.9rem;
+  }
+
+  &__itemDescription {
+    color: $secondary-font-color;
+    font-size: 0.9rem;
+    text-align: right;
+    outline: none;
+  }
+
+  &__buttons {
+    font-size: 0.9rem;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  &__btn {
+    background: transparent;
+    outline: none;
+    padding: 10px 0;
+    color: $primary-color;
+    text-decoration: none;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid #eaeaea;
+    }
+  }
+
+  &__logout {
+    color: #ff0000;
+  }
+
+  &__errorMessagePopup {
+    font-size: 1rem;
+    margin: 15px auto 0;
+    color: red;
+    display: none;
+  }
+}
