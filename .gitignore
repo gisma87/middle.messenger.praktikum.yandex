@@ -1,0 +1,6 @@
+.idea
+/node_modules
+/.parcel-cache
+/.cache
+/static/js
+distgit 
