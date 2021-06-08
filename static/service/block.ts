@@ -95,7 +95,6 @@ class Block {
     if (this.shouldComponentUpdate(prevProps, prevState)) {
       // если shouldComponentUpdate не запрещает и элемент присутствует на странице то перерисовываем.
       if (this._element) {
-        console.log('Обновляем компонент', this);
         this._removeEventListener();
         this.eventBus.emit(Block.EVENTS.FLOW_RERENDER);
         this.setEventListener();

@@ -30,7 +30,6 @@ class Route {
 
   leave() {
     if (this._block) {
-      console.log('leave: ', this._block);
       this._block.remove();
     }
   }
@@ -40,7 +39,6 @@ class Route {
   }
 
   render() {
-    console.log('render route: ', this._block);
     this._block.render();
   }
 }
@@ -91,7 +89,6 @@ class Router {
         if (redirect.startPath === pathname && isActive === true) {
           isRedirect = true;
           historyPush(redirect.redirectPath);
-          console.log('REDIRECT TO ', pathname);
         }
       });
     }

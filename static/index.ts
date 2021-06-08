@@ -27,8 +27,6 @@ router.use('/error500', pageError500);
 router.use('/login', loginPage);
 router.use('/signin', signinPage);
 
-console.log('store.state.auth: ', store.state.auth);
-
 router.addRedirect('/chat', '/login', () => !store.state.auth);
 router.addRedirect('/login', '/chat', () => store.state.auth);
 router.addRedirect('/signin', '/chat', () => store.state.auth);
