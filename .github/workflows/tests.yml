@@ -47,13 +47,13 @@ jobs:
     - name: Get testing lib
       run: set -eu && git clone https://github.com/Yandex-Practicum/tests-second-floor.git
     - name: Check npm run start existence
-      run: bash tests-second-floor/sprint_2/check_start.sh
+      run: bash tests-second-floor/sprint_1/check_start.sh
     - name: Check Parcel in start script
-      run: bash tests-second-floor/sprint_2/check_parcel.sh
+      run: bash tests-second-floor/sprint_1/check_parcel.sh
     - name: Check PORT 3000
-      run: bash tests-second-floor/sprint_2/check_port.sh
+      run: bash tests-second-floor/sprint_1/check_port.sh
     - name: Check routing
-      run: node tests-second-floor/sprint_2/check_routing.js
+      run: node tests-second-floor/sprint_1/check_routing.js
       # sprint 2 checks
     - name: Check typescript in package.json
       run: node tests-second-floor/sprint_2/check_typescript.js
