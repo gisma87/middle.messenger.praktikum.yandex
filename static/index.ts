@@ -1,3 +1,4 @@
+import './scss/index.scss'
 import store from './store/index';
 import { Router } from './service/Router';
 import { chats } from './pages/chat/chat';

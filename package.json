@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "./node_modules/.bin/mocha ",
-    "start": "node server.js",
+    "start": "npm run build && node ./server.js",
     "scss": "node-sass static/scss --o static/styles",
     "dev": "parcel ./static/index.html --port 3000",
     "dev-build": "parcel watch build ./static/index.html",
