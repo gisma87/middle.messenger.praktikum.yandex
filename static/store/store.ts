@@ -23,7 +23,7 @@ export default class Store {
     self.mutations = params.mutations;
     self.status = 'resting';
     self.events = new eventBus();
-    self.state = this._makePropsProxy(params.state, self);
+    self.state = this._makePropsProxy({...params.state}, self);
   }
 
   _makePropsProxy(state: stateType, self: Store) {
@@ -41,7 +41,7 @@ export default class Store {
     });
   }
 
-  dispatch(actionKey: actionsKey, payload: any) {
+  dispatch(actionKey: actionsKey, payload?: any) {
     const self = this;
     if (typeof self.actions[actionKey] !== 'function') {
       console.error(`Action "${actionKey} doesn't exist.`);
@@ -61,7 +61,7 @@ export default class Store {
     return true;
   }
 
-  commit(mutationKey: mutationsKey, payload: any) {
+  commit(mutationKey: mutationsKey, payload?: any) {
     console.log('mutation in commit: ', mutationKey, 'payload: ', payload);
     const self = this;
     if (typeof self.mutations[mutationKey] !== 'function') {

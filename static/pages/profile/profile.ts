@@ -106,6 +106,7 @@ profile.addListener('.profile__logout', 'click', logoutFetch);
 const logout = () => {
   window.sessionStorage.clear();
   store.dispatch(mutationsEnum.setAuth, false);
+  store.dispatch(mutationsEnum.clearState);
   historyPush('/login');
 };
 

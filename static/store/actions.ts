@@ -11,6 +11,7 @@ export type actionsType = {
   setChats: (state: Store, payload: chatListType) => void;
   setActiveChat: (state: Store, payload: string) => void;
   setChatUsers: (state: Store, payload: chatUsers) => void;
+  clearState: (state: Store) => void;
   [key: string]: (state: Store, payload: any) => void;
 };
 
@@ -35,5 +36,8 @@ export default {
   setChatUsers(context: Store, payload: chatUsers) {
     sessionStorage.setItem('users', JSON.stringify(payload));
     context.commit(mutationsEnum.setChatUsers, payload);
+  },
+  clearState(context: Store) {
+    context.commit(mutationsEnum.clearState);
   },
 };

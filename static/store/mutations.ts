@@ -1,5 +1,5 @@
 import {objType, stateType, userInfoType} from './typeStore';
-import {chatListType, chatUsers} from './state';
+import initialState, {chatListType, chatUsers} from './state';
 
 export type mutationsKey = keyof mutationsType;
 
@@ -8,7 +8,8 @@ export enum mutationsEnum {
   setUserInfo = 'setUserInfo',
   setChats = 'setChats',
   setActiveChat = 'setActiveChat',
-  setChatUsers = 'setChatUsers'
+  setChatUsers = 'setChatUsers',
+  clearState = 'clearState'
 }
 
 export type mutationsType = {
@@ -17,6 +18,7 @@ export type mutationsType = {
   setChats: (state: stateType, payload: chatListType) => stateType;
   setActiveChat: (state: stateType, payload: string) => stateType;
   setChatUsers: (state: stateType, payload: chatUsers) => stateType;
+  clearState: () => stateType;
   [key: string]: (state: stateType, payload: any) => stateType;
 };
 
@@ -95,5 +97,10 @@ export default {
       ...state,
       users: payload,
     };
+  },
+  clearState() {
+    return {
+      ...initialState,
+    }
   },
 };

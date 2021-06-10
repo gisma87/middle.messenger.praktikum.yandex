@@ -37,36 +37,14 @@ export default {
   users: [
     {
       id: '',
-      first_name: 'Вася',
-      second_name: 'Маньков',
+      first_name: '',
+      second_name: '',
       display_name: '',
-      login: 'Ёжик',
+      login: '',
       email: '',
       phone: '',
       avatar: '',
-      role: '',
-    },
-    {
-      id: '',
-      first_name: 'Стас',
-      second_name: 'Маньков',
-      display_name: '',
-      login: 'Ежидзе',
-      email: '',
-      phone: '',
-      avatar: '',
-      role: '',
-    },
-    {
-      id: '',
-      first_name: 'Гуля',
-      second_name: 'Манькова',
-      display_name: '',
-      login: 'ЕжихаСимпотяха',
-      email: '',
-      phone: '',
-      avatar: '',
-      role: '',
+      role: ''
     }
   ]
 };
