@@ -1,7 +1,9 @@
+@import "../../variables";
+
 .buttonPrimary {
   cursor: pointer;
-  outline: none;
-  background: #3369f3;
+  outline: 1px solid $primary-color;
+  background: $primary-color;
   border-radius: 8px;
   padding: 12px;
   width: 100%;
