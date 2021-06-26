@@ -1,16 +1,17 @@
 import './scss/index.scss'
 import store from './store/index';
-import { Router } from './service/Router';
-import { chats } from './pages/chat/chat';
-import { profile } from './pages/profile/profile';
-import { profileChangeData } from './pages/profileChangeData/profileChangeData';
-import { profileChangePassword } from './pages/profileChangePassword/profileChangePassword';
-import { pageNotFound } from './pages/pageError/pageNotFound';
-import { pageError500 } from './pages/pageError/pageError';
-import { loginPage } from './pages/login/login';
-import { signinPage } from './pages/signin/signin';
-import { UserApi } from './service/API/user-api';
-import { historyPush } from './service/utils';
+import {Router} from './service/Router';
+import {chats} from './pages/chat/chat';
+import {profile} from './pages/profile/profile';
+import {profileChangeData} from './pages/profileChangeData/profileChangeData';
+import {profileChangePassword} from './pages/profileChangePassword/profileChangePassword';
+import {pageNotFound} from './pages/pageError/pageNotFound';
+import {pageError500} from './pages/pageError/pageError';
+import {loginPage} from './pages/login/login';
+import {signinPage} from './pages/signin/signin';
+import {UserApi} from './service/API/user-api';
+import {historyPush} from './service/utils';
+import {webSocketApi} from "./service/API/webSocket-api";
 
 const isAuth = sessionStorage.getItem('auth') || false;
 
@@ -38,7 +39,7 @@ router.start();
 userApi.getUserInfo();
 // chatApi.getChats()
 
-store.events.on('stateChange', () => {
+store.events.on('stateChange', ({prevState, newState}) => {
   if (
     store.state.auth &&
     (window.location.pathname === '/login' ||
@@ -53,6 +54,10 @@ store.events.on('stateChange', () => {
   ) {
     historyPush('/login');
   }
+
+  if (prevState.activeChat !== newState.activeChat) {
+    if (newState.activeChat) webSocketApi.createSocket(newState.activeChat);
+  }
 });
 
-export { isAuth, router };
+export {isAuth, router};

@@ -14,7 +14,7 @@ type Listeners = {
 }[];
 
 class FormValidator {
-  form: HTMLElement;
+  form: HTMLFormElement;
   listeners: Listeners;
   errorMessages: { [key: string]: string };
   formatValidate: IformatValidate;
@@ -22,7 +22,7 @@ class FormValidator {
   callback: ((obj: { [key: string]: string }) => void) | undefined;
 
   constructor(
-    form: HTMLElement,
+    form: HTMLFormElement,
     callback?: (obj: { [key: string]: string }) => void,
   ) {
     this.form = form;
@@ -132,7 +132,7 @@ class FormValidator {
       });
       if (this.callback && !typeFile) this.callback(formData);
     }
-
+    this.form.reset()
     // // @ts-ignore
     // const obj = this.inputs[0].files[0]
     // const formData = new FormData();

@@ -8,6 +8,7 @@ import {historyPush} from '../../service/utils';
 import store from '../../store/index';
 import {mutationsEnum} from '../../store/mutations';
 import {stateType} from "../../store/typeStore";
+import {webSocketApi} from "../../service/API/webSocket-api";
 
 const chatProps = () => {
   return {
@@ -42,6 +43,7 @@ class Chats extends Block {
     if (!store.state.chatsList?.length) {
       chatApi.getChats()
     }
+    this.scrollToBottomChatBlock()
   }
 
   componentDidUpdate(prevProps: Iprops, prevState: stateType) {
@@ -58,6 +60,13 @@ class Chats extends Block {
           })
       }
     }
+    this.scrollToBottomChatBlock()
+  }
+
+  scrollToBottomChatBlock() {
+    const messageBlock = document.querySelector('.messageBlock__content')
+    console.log('messageBlock: ', messageBlock)
+    if(messageBlock) messageBlock.scrollTo(0, messageBlock?.scrollHeight);
   }
 }
 
@@ -137,6 +146,9 @@ function submit(data: { [key: string]: string }) {
       //         }
       //     })
       //     .catch(e => console.log(e))
+      break;
+    case 'message':
+      if(store.state?.activeChat) webSocketApi.send({message: data.message, chatID: store.state?.activeChat});
       break;
     default:
       console.log(data);

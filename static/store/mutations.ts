@@ -1,5 +1,5 @@
 import {objType, stateType, userInfoType} from './typeStore';
-import initialState, {chatListType, chatUsers} from './state';
+import initialState, {chatListType, chatUsers, messageType} from './state';
 
 export type mutationsKey = keyof mutationsType;
 
@@ -9,7 +9,9 @@ export enum mutationsEnum {
   setChats = 'setChats',
   setActiveChat = 'setActiveChat',
   setChatUsers = 'setChatUsers',
-  clearState = 'clearState'
+  clearState = 'clearState',
+  setToken = 'setToken',
+  setMessage = 'setMessage'
 }
 
 export type mutationsType = {
@@ -19,6 +21,8 @@ export type mutationsType = {
   setActiveChat: (state: stateType, payload: string) => stateType;
   setChatUsers: (state: stateType, payload: chatUsers) => stateType;
   clearState: () => stateType;
+  setToken: (state: stateType, payload: string) => stateType;
+  setMessage: (state: stateType, payload: messageType) => stateType;
   [key: string]: (state: stateType, payload: any) => stateType;
 };
 
@@ -27,7 +31,6 @@ function addIsSelectedToChatList(chatsList: objType[], activeChatId: string | nu
     chat.selected = chat?.id?.toString() === activeChatId.toString();
     return chat;
   })
-
 }
 
 export default {
@@ -103,4 +106,26 @@ export default {
       ...initialState,
     }
   },
+
+  setToken(state: stateType, payload: string) {
+    return {
+      ...state,
+      token: payload,
+    };
+  },
+
+  setMessage(state: stateType, payload: messageType) {
+    if (payload instanceof Array) {
+      return {
+        ...state,
+        messageStore: payload.reverse(),
+      };
+    }
+    const newMessageStore = [...state.messageStore]
+    newMessageStore.push(payload)
+    return {
+      ...state,
+      messageStore: newMessageStore
+    }
+  }
 };

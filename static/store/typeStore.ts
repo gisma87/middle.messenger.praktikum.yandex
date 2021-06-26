@@ -1,3 +1,5 @@
+import {messageType} from "./state";
+
 export type objType = {
   [key: string]:
     | string
@@ -41,6 +43,8 @@ export type stateType = {
   chat: objType;
   users: objType[];
   activeChat: string | number | null;
+  token?: string;
+  messageStore: messageType[]
   [key: string]:
     | string
     | number

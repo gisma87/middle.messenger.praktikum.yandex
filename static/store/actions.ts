@@ -1,7 +1,7 @@
 import Store from './store';
-import { mutationsEnum } from './mutations';
-import { userInfoType } from './typeStore';
-import {chatListType, chatUsers} from './state';
+import {mutationsEnum} from './mutations';
+import {userInfoType} from './typeStore';
+import {chatListType, chatUsers, messageType} from './state';
 
 export type actionsKey = keyof actionsType;
 
@@ -12,6 +12,8 @@ export type actionsType = {
   setActiveChat: (state: Store, payload: string) => void;
   setChatUsers: (state: Store, payload: chatUsers) => void;
   clearState: (state: Store) => void;
+  setToken: (state: Store, payload: string) => void;
+  setMessage: (state: Store, payload: messageType) => void;
   [key: string]: (state: Store, payload: any) => void;
 };
 
@@ -38,6 +40,14 @@ export default {
     context.commit(mutationsEnum.setChatUsers, payload);
   },
   clearState(context: Store) {
+    window.sessionStorage.clear()
     context.commit(mutationsEnum.clearState);
   },
+  setToken(context: Store, payload: string) {
+    sessionStorage.setItem('token', payload);
+    context.commit(mutationsEnum.setToken, payload);
+  },
+  setMessage(context: Store, payload: messageType) {
+    context.commit(mutationsEnum.setMessage, payload)
+  }
 };

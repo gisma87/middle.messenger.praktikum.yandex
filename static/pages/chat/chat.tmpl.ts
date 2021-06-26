@@ -87,31 +87,26 @@ export const chatTmpl = `<main class="ChatPage">
     
           <div class="messageBlock__dateMessage">19 июля</div>
     
-          <div class="messageBlock__messageLeft">
-            <div class="messageBlock__textBlock">
-              <p class="messageBlock__text">
-                Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила
-                Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью
-                500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с
-                собой забрали только кассеты с пленкой.
-              </p>
-              <p class="messageBlock__text">
-                Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не
-                попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро.
-              </p>
-            </div>
-            <span class="messageBlock__timeMessage">11:56</span>
-          </div>
-    
-          <div class="messageBlock__messageRight">
-            <div class="messageBlock__textBlock">
-              <p class="messageBlock__text">Круто!</p>
-            </div>
-            <div class="messageBlock__timeMessage">
-              <i class="messageBlock__checkMessage icon-check"></i>
-              <span>12:00</span>
-            </div>
-          </div>
+            <% messageList.forEach(function(item) { %>
+              <% if(item.isMy){%> 
+                <div class="messageBlock__messageRight">
+                  <div class="messageBlock__textBlock">
+                    <p class="messageBlock__text"><%-item.message%></p>
+                  </div>
+                  <div class="messageBlock__timeMessage">
+                    <i class="messageBlock__checkMessage icon-check"></i>
+                    <span><%-item.time%></span>
+                  </div>
+                </div>
+              <% } else { %>
+                 <div class="messageBlock__messageLeft">
+                    <div class="messageBlock__textBlock">
+                      <p class="messageBlock__text"><%-item.message%></p>
+                    </div>
+                    <span class="messageBlock__timeMessage"><%-item.time%></span>
+                </div>
+              <% } %>
+            <% }); %>    
         </div>
     
         <form name="message" class="messageBlock__inputContainer" novalidate>
