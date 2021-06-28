@@ -22,7 +22,7 @@ class UserApi {
     this.URL = 'https://ya-praktikum.tech/api/v2';
     this.headers = { 'Content-Type': 'application/json' };
     this.store = store;
-    this.imgPath = 'https://ya-praktikum.tech';
+    this.imgPath = 'https://ya-praktikum.tech/api/v2/resources';
     this.rerender = rerender;
   }
 

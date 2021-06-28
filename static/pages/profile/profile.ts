@@ -189,7 +189,7 @@ function setValidator() {
   new InputTypeFile(propsInputTypeFile);
 
   // валидируем форму с InputTypeFile
-  const form: HTMLElement | null = document.querySelector('#addFileForPhoto');
+  const form: HTMLFormElement | null = document.querySelector('#addFileForPhoto');
   const formValidator = form ? new FormValidator(form, submit) : null;
 
   if (formValidator) {
