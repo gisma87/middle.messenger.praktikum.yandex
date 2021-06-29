@@ -1,6 +1,6 @@
 import './scss/index.scss'
 import store from './store/index';
-import {Router} from './service/Router';
+import {Router} from './service/Router/Router';
 import {chats} from './pages/chat/chat';
 import {profile} from './pages/profile/profile';
 import {profileChangeData} from './pages/profileChangeData/profileChangeData';
