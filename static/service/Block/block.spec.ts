@@ -1,6 +1,6 @@
-import {expect} from 'chai';
-import {JSDOM} from 'jsdom';
-import {Block} from "./block";
+import '../../test';
+import { expect } from 'chai';
+import { Block } from './block';
 
 class Button extends Block {
   static OPTIONS = {
@@ -12,7 +12,7 @@ class Button extends Block {
     super(() => ({
       root: props.root ? props.root : undefined,
       template: Button.OPTIONS.TEMPLATE,
-      data: {text: props.text},
+      data: { text: props.text },
     }));
   }
 
@@ -21,34 +21,24 @@ class Button extends Block {
   }
 }
 
-// const button = new Button({root: '.root', text: 'Кнопка'})
+describe('test Block', () => {
+  it('создаем компонент кнопки', () => {
+    //
+    // получая $button мы уже можем убедиться что компонент создан и отрендерен корректно
+    const button: Button = new Button({ root: 'root', text: 'Кнопка' });
+    const $button = button.getContent();
 
-const globalAny: any = global;
-const {window} = new JSDOM(
-  `<html lang="ru">
-                <head>
-                  <meta charset="UTF-8" />
-                  <title>messenger</title>
-                </head>
-                <body>
-                  <div class="root"></div>
-                  <div class="backdrop"></div>
-                </body>
-              </html>`,
-  {url: 'http://localhost'},
-);
+    expect($button?.textContent).to.equal('Кнопка');
 
-globalAny.document = window.document;
-globalAny.window = global.document.defaultView;
+    // БОНУС
+    // если ты хочешь компонент дополнительно встроить в дом (зачем?)
+    // тогда явно вставляем его в наш текущий контекст - JSDOM
+    // так же надо не забыть перед каждым тестом очищать наш - JSDOM (общий для тестов)
 
-describe('test Router', () => {
-  beforeEach(() => {
+    // document.querySelector('.root')?.appendChild($button!);
 
-  });
-  it('запускаем router. Должен монтироваться элемент в DOM', () => {
-    // console.log(button.element)
-    // const findElement = document.querySelector('.buttonPrimary')
+    // только после этого ищем в доме
+    // const findElement = document.querySelector('.buttonPrimary');
     // expect(findElement?.textContent).to.equal('Кнопка');
-  })
-
-})
+  });
+});
