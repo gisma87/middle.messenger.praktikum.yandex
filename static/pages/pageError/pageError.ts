@@ -1,4 +1,4 @@
-import { Block, Iprops } from '../../service/block';
+import { Block, Iprops } from '../../service/Block/block';
 import { errorTmpl } from './pageError.tmpl';
 
 const dataError500 = { text: 'Мы уже фиксим', title: '500' };

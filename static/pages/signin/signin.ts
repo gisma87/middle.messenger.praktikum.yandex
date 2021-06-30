@@ -1,4 +1,4 @@
-import { Iprops } from '../../service/block';
+import { Iprops } from '../../service/Block/block';
 import { FormValidator } from '../../service/formValidator';
 import { signinTmpl } from './signin.tmpl';
 import { dataSigninPage } from './constants';

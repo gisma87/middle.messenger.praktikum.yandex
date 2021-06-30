@@ -1,4 +1,4 @@
-import {Block, Iprops} from '../../service/block';
+import {Block, Iprops} from '../../service/Block/block';
 import {Popup} from '../../service/popup';
 import {FormValidator} from '../../service/formValidator';
 import {chatApi} from '../../service/API/chat-api';

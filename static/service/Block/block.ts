@@ -1,8 +1,8 @@
-import EventBus from './eventBus';
-import {isEqual} from './utils';
-import Store from '../store/store';
-import cloneDeep from './cloneDeep';
-import {stateType} from "../store/typeStore";
+import EventBus from '../EventBus/eventBus';
+import {isEqual} from '../utils';
+import Store from '../../store/store';
+import cloneDeep from '../cloneDeep';
+import {stateType} from "../../store/typeStore";
 import template from 'lodash.template'
 
 export interface Iprops {

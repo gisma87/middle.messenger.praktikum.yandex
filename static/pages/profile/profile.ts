@@ -1,4 +1,4 @@
-import { Block, Iprops } from '../../service/block';
+import { Block, Iprops } from '../../service/Block/block';
 import { Popup } from '../../service/popup';
 import { InputTypeFile } from '../../service/InputTypeFile';
 import { FormValidator } from '../../service/formValidator';

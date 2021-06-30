@@ -1,4 +1,4 @@
-import { Block, Iprops } from '../../service/block';
+import { Block, Iprops } from '../../service/Block/block';
 import { profileChangePasswordPage } from './constants';
 import { FormValidator } from '../../service/formValidator';
 import { profileChangePasswordTmpl } from './profileChangePassword.tmpl';

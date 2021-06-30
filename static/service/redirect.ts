@@ -1,4 +1,4 @@
-import { Block } from './block';
+import { Block } from './Block/block';
 import { isAuth } from '../index';
 import { loginPage } from '../pages/login/login';
 import { chats } from '../pages/chat/chat';

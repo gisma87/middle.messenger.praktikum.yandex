@@ -1,4 +1,4 @@
-import eventBus from '../service/eventBus';
+import eventBus from '../service/EventBus/eventBus';
 import { stateType, stateKey } from './typeStore';
 import { mutationsType, mutationsKey } from './mutations';
 import { actionsKey, actionsType } from './actions';
