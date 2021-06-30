@@ -3,6 +3,7 @@ import {isEqual} from './utils';
 import Store from '../store/store';
 import cloneDeep from './cloneDeep';
 import {stateType} from "../store/typeStore";
+import template from 'lodash.template'
 
 export interface Iprops {
   class?: string | string[];
@@ -131,7 +132,7 @@ class Block {
 
   template() {
     // @ts-ignore
-    return _.template(this.props.template)(this.props.data);
+    return template(this.props.template)(this.props.data);
   }
 
   _render() {

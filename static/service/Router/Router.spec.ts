@@ -2,6 +2,7 @@ import {Router} from "./Router";
 import {expect} from 'chai';
 import {JSDOM} from 'jsdom';
 import {Block} from "./Router";
+import {pageError500} from "../../pages/pageError/pageError";
 
 const globalAny: any = global;
 declare global {
@@ -69,7 +70,7 @@ describe('test Router', () => {
     testBlock = new mockBlock('test', 'TEST')
     testBlock2 = new mockBlock('test2', 'TEST2')
   });
-  it('первый тест роутера', () => {
+  it('запускаем router. Должен монтироваться элемент в DOM', () => {
     const router = new Router('.root')
     router.use('/', testBlock);
     router.use('/test2', testBlock2);
@@ -78,13 +79,34 @@ describe('test Router', () => {
     expect(findElement?.textContent).to.equal('TEST');
   })
 
-  it('второй тест роутера', () => {
+  it('переход с / на /test2 при этом меняется элемент в DOM', () => {
+    window.onpopstate = () => console.log('REDIRECT')
+    window.addEventListener('onpopstate', () => console.log('SDFDFS'))
     const router = new Router('.root')
     router.use('/', testBlock);
     router.use('/test2', testBlock2);
+    router.addRedirect('/test4', '/test2', () => true);
     router.start();
     router.go('/test2')
     const findElement = document.querySelector('.test2')
     expect(findElement?.textContent).to.equal('TEST2');
+    expect(findElement?.className.length).to.equal(5)
+    expect(window.location.pathname).to.equal('/test2')
+
+    router.go('/test3')
+    expect(window.location.pathname).to.equal('/test3')
+
+    router.go('/test4')
+
+    console.log(window.location.pathname)
+
+  })
+
+  it('монтируем настоящий блок', () => {
+    const router = new Router('.root')
+    router.use('/error500', pageError500);
+    router.go('/unknown')
+    const findElement = document.querySelector('.pageErrorMessage')
+    expect(findElement?.className).to.equal('pageErrorMessage')
   })
 })
