@@ -1,5 +1,5 @@
+import '../../test'
 import {expect} from 'chai';
-import {JSDOM} from 'jsdom';
 import {Block} from "./block";
 
 class Button extends Block {
@@ -23,32 +23,11 @@ class Button extends Block {
 
 // const button = new Button({root: '.root', text: 'Кнопка'})
 
-const globalAny: any = global;
-const {window} = new JSDOM(
-  `<html lang="ru">
-                <head>
-                  <meta charset="UTF-8" />
-                  <title>messenger</title>
-                </head>
-                <body>
-                  <div class="root"></div>
-                  <div class="backdrop"></div>
-                </body>
-              </html>`,
-  {url: 'http://localhost'},
-);
+describe('test Block', () => {
 
-globalAny.document = window.document;
-globalAny.window = global.document.defaultView;
-
-describe('test Router', () => {
-  beforeEach(() => {
-
-  });
-  it('запускаем router. Должен монтироваться элемент в DOM', () => {
-    // console.log(button.element)
-    // const findElement = document.querySelector('.buttonPrimary')
-    // expect(findElement?.textContent).to.equal('Кнопка');
+  it('создаем компонент кнопки', () => {
+    const button: Button = new Button({ root: 'root', text: 'Кнопка' });
+    const $button = button.getContent();
+    expect($button?.textContent).to.equal('Кнопка');
   })
-
 })
