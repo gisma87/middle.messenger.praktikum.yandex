@@ -1,0 +1,136 @@
+@import '../../variables';
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 100%;
+
+  &__title {
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+
+  &__element {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    padding-top: 10px;
+  }
+
+  &__label {
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: $secondary-font-color;
+    transform: translateY(0);
+    transition: transform 0.3s, font-size 0.3s;
+  }
+
+  &__input:focus + .form__label {
+    font-size: 0.6rem;
+    transform: translateY(-24px);
+  }
+
+  &__input:valid + .form__label {
+    font-size: 0.6rem;
+    transform: translateY(-24px);
+  }
+
+  &__input {
+    width: 100%;
+    outline: none;
+    border-bottom: 1px solid $primary-color;
+    padding: 5px 0;
+    font-size: 0.9rem;
+    line-height: 1.1rem;
+  }
+
+  &__errorMessage {
+    position: absolute;
+    bottom: -16px;
+    left: 0;
+    color: #ff2f2f;
+    font-size: 0.55rem;
+    font-weight: 400;
+    opacity: 0;
+  }
+
+  &__errorMessage_visible {
+    display: flex !important;
+    opacity: 1 !important;
+  }
+
+  &__buttons {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__link {
+    color: $primary-color;
+    margin-top: 14px;
+    font-size: 0.8rem;
+
+    &:hover {
+      color: #95c11f;
+    }
+  }
+
+  &__inputFile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+
+  &__labelFile {
+    margin: 0 auto;
+    max-width: 122px;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: $primary-color;
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  &__fileTitle {
+    color: #8d8d8d;
+    font-size: 0.9rem;
+    margin: 0 auto;
+  }
+
+  &__fileContainer {
+    display: none;
+  }
+
+  &__imgDeleteBtn {
+    object-fit: cover;
+    cursor: pointer;
+  }
+
+  &__response-block {
+    color: red;
+    display: flex;
+    text-align: center;
+    visibility: hidden;
+
+    &_visible {
+      visibility: visible;
+    }
+  }
+}
+
+.form__labelFile:hover,
+.form__labelFile:focus {
+  text-decoration: underline;
+}
