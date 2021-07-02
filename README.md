@@ -1,6 +1,6 @@
 ## [ссылка на сайт](https://admiring-fermat-7d32ca.netlify.app/)
- 
 
+### [ссылка на pull request](https://github.com/gisma87/middle.messenger.praktikum.yandex/pull/3)
 
 ## Установка
 
