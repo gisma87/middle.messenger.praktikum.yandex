@@ -10,54 +10,34 @@ import {pageError500} from './pages/pageError/pageError';
 import {loginPage} from './pages/login/login';
 import {signinPage} from './pages/signin/signin';
 import {UserApi} from './service/API/user-api';
-import {historyPush} from './service/utils';
-import {webSocketApi} from "./service/API/webSocket-api";
+import {enableSubscription} from './service/utils';
+import {pathNames} from "./constants";
 
 const isAuth = sessionStorage.getItem('auth') || false;
 
 const router = new Router('.root');
 export const userApi = new UserApi(store, router.rerender);
 
-router.use('/', chats);
-router.use('/chat', chats);
-router.use('/profile', profile);
-router.use('/profileChangeData', profileChangeData);
-router.use('/profileChangePassword', profileChangePassword);
-router.use('/pageNotFound', pageNotFound);
-router.use('/error500', pageError500);
-router.use('/login', loginPage);
-router.use('/signin', signinPage);
+router.use(pathNames.defaultPath, chats);
+router.use(pathNames.chats, chats);
+router.use(pathNames.profile, profile);
+router.use(pathNames.profileChangeData, profileChangeData);
+router.use(pathNames.profileChangePassword, profileChangePassword);
+router.use(pathNames.pageNotFound, pageNotFound);
+router.use(pathNames.error500, pageError500);
+router.use(pathNames.login, loginPage);
+router.use(pathNames.signin, signinPage);
 
-router.addRedirect('/chat', '/login', () => !store.state.auth);
-router.addRedirect('/login', '/chat', () => store.state.auth);
-router.addRedirect('/signin', '/chat', () => store.state.auth);
-router.addRedirect('/', '/login', () => !store.state.auth);
-router.addRedirect('/', '/chat', () => store.state.auth);
+router.addRedirect(pathNames.chats, pathNames.login, () => !store.state.auth);
+router.addRedirect(pathNames.login, pathNames.chats, () => store.state.auth);
+router.addRedirect(pathNames.signin, pathNames.chats, () => store.state.auth);
+router.addRedirect(pathNames.defaultPath, pathNames.login, () => !store.state.auth);
+router.addRedirect(pathNames.defaultPath, pathNames.chats, () => store.state.auth);
 
 router.start();
 
 userApi.getUserInfo();
-// chatApi.getChats()
 
-store.events.on('stateChange', ({prevState, newState}) => {
-  if (
-    store.state.auth &&
-    (window.location.pathname === '/login' ||
-      window.location.pathname === '/signin')
-  ) {
-    historyPush('/chat');
-  }
-  if (
-    !store.state.auth &&
-    window.location.pathname !== '/login' &&
-    window.location.pathname !== '/signin'
-  ) {
-    historyPush('/login');
-  }
-
-  if (prevState.activeChat !== newState.activeChat) {
-    if (newState.activeChat) webSocketApi.createSocket(newState.activeChat);
-  }
-});
+enableSubscription()
 
 export {isAuth, router};

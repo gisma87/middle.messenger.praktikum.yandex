@@ -29,10 +29,7 @@ class Chats extends Block {
 
   constructor(getProps: () => Iprops, setPopup: () => Popup) {
     super(getProps);
-    this.callbackAfterRender = this.props.callbackAfterRender
-      ? this.props.callbackAfterRender
-      : () => {
-      };
+    this.callbackAfterRender = this.props.callbackAfterRender || (() => {});
     this.setPopup = setPopup;
   }
 
@@ -41,9 +38,9 @@ class Chats extends Block {
     this.popups = this.setPopup();
 
     if (!store.state.chatsList?.length) {
-      chatApi.getChats()
+      chatApi.getChats();
     }
-    this.scrollToBottomChatBlock()
+    this.scrollToBottomChatBlock();
   }
 
   componentDidUpdate(prevProps: Iprops, prevState: stateType) {

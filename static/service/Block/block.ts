@@ -4,6 +4,7 @@ import Store from '../../store/store';
 import cloneDeep from '../cloneDeep';
 import {stateType} from "../../store/typeStore";
 import template from 'lodash.template'
+import {eventsName} from "../../constants";
 
 export interface Iprops {
   class?: string | string[];
@@ -46,7 +47,7 @@ class Block {
 
     if (this.props?.store instanceof Store) {
       const store = this.props.store;
-      store.events.on('stateChange', ({prevState}) => this.setProps(this.getProps(), prevState));
+      store.events.on(eventsName.stateChange, ({prevState}) => this.setProps(this.getProps(), prevState));
     }
 
     this.root = this.props.root

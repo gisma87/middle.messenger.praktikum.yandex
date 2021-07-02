@@ -1,5 +1,6 @@
 import { Block, Iprops } from '../../service/Block/block';
 import { errorTmpl } from './pageError.tmpl';
+import {historyPush} from "../../service/utils";
 
 const dataError404 = { text: 'Не туда попали', title: '404' };
 
@@ -56,17 +57,9 @@ class PageNotFound extends Block {
 
 const pageNotFound = new PageNotFound(propsPageNotFound);
 
-function historyPush(url: string = '/'): void {
-  window.history.pushState('', '', url);
-  window.history.pushState('', '', url);
-  window.history.replaceState('', '', url);
-  window.history.back();
-  window.history.forward();
-}
-
 const historyPushPageNotFound = (event: Event) => {
   event.preventDefault();
-  historyPush();
+  historyPush('/');
 };
 
 pageNotFound.addListener(

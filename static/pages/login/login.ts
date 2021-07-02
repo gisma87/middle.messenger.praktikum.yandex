@@ -123,7 +123,7 @@ function submit(obj: { [key: string]: string }) {
       const response = (res as { response: any }).response;
       console.log('res: ', res);
       console.log('res.response: ', response);
-      if (status === (200 || 400)) {
+      if (status === 200 || status === 400) {
         console.log('res.status: ', status);
         if (status === 200) {
           historyPush('/chat');
@@ -156,7 +156,7 @@ function setValidator() {
   loginPage.addListener('.form__link_signin', 'click', historyPushSignin);
 
   const elementLoginPage = loginPage.getContent();
-  const form: HTMLElement | null | undefined =
+  const form: HTMLFormElement | null | undefined =
     elementLoginPage?.querySelector('#loginForm');
   const formValidatorLogin = form ? new FormValidator(form, submit) : null;
   if (formValidatorLogin) {

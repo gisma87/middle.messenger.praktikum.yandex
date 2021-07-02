@@ -3,6 +3,7 @@ import { stateType, stateKey } from './typeStore';
 import { mutationsType, mutationsKey } from './mutations';
 import { actionsKey, actionsType } from './actions';
 import cloneDeep from '../service/cloneDeep';
+import { eventsName } from '../constants';
 
 type Params = {
   mutations: mutationsType;
@@ -52,10 +53,6 @@ export default class Store {
     self.actions[actionKey](self, payload);
     const oldState = cloneDeep(self.state);
     console.log('oldState: ', oldState);
-    // self.events.emit('stateChange', {
-    //   oldState: oldState,
-    //   newState: self.state,
-    // });
     console.groupEnd();
 
     return true;
@@ -75,7 +72,7 @@ export default class Store {
     self.state = this._makePropsProxy(newState, self);
     console.log('prevState: ', prevState);
     console.log('newState: ', newState);
-    self.events.emit('stateChange', {
+    self.events.emit(eventsName.stateChange, {
       prevState: prevState,
       newState: self.state,
     });
