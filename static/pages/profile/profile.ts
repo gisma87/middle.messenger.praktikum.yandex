@@ -152,8 +152,7 @@ function setValidator() {
         if (status === 200) {
           profile.popups?.removeClassActivePopup();
           userApi.getUserInfo();
-        }
-        if (status !== 200) {
+        } else {
           console.log('Ошибка запроса: ', status);
         }
       })

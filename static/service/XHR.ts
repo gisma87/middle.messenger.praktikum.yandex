@@ -14,15 +14,6 @@ const METHODS = {
   DELETE: 'DELETE',
 };
 
-/**
- * Функцию реализовывать здесь необязательно, но может помочь не плодить логику у GET-метода
- * На входе: объект. Пример: {a: 1, b: 2, c: {d: 123}, k: [1, 2, 3]}
- * На выходе: строка. Пример: ?a=1&b=2&c=[object Object]&k=1,2,3
- */
-// function queryStringify(data) {
-//     return "?" + Object.keys(data).map(key => key + '=' + data[key]).join('&');
-// }
-
 class HTTPTransport {
   get = (url: string, options: Options = {}) => {
     if (typeof options?.data === 'object') {
@@ -97,16 +88,3 @@ class HTTPTransport {
 
 const xhr = new HTTPTransport();
 export { xhr };
-
-// function fetchWithRetry(url, options) {
-//     let count = 0;
-//     const catchErrors = () => {
-//         if (options.retries > 1 && count < options.retries) {
-//             count += 1;
-//             return new HTTPTransport().get(url, options).then(response => new Response(response)).catch(catchErrors);
-//         } else {
-//             throw new Error('ресурс недоступен')
-//         }
-//     };
-//     return new HTTPTransport().get(url, options).then(response => new Response(response)).catch(catchErrors);
-// }

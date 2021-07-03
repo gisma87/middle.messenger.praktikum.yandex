@@ -10,7 +10,7 @@ import {pageError500} from './pages/pageError/pageError';
 import {loginPage} from './pages/login/login';
 import {signinPage} from './pages/signin/signin';
 import {UserApi} from './service/API/user-api';
-import {enableSubscription} from './service/utils';
+import {enableSubscription} from './service/enableSubscription';
 import {pathNames} from "./constants";
 
 const isAuth = sessionStorage.getItem('auth') || false;
