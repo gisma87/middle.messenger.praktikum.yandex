@@ -30,7 +30,6 @@ function submit(obj: { [key: string]: string }) {
   userApi.createNewUser(data).then(res => {
     const status = (res as { [key: string]: any }).status;
     const response = (res as { response: any }).response;
-    console.log('INFO: ', status, response);
     if (status === 409) {
       const blockWarningMessage = signinPage
         .getContent()
@@ -57,7 +56,7 @@ const historyPushLogin = (event: Event) => {
 function setValidator() {
   signinPage.addListener('.form__link_login', 'click', historyPushLogin);
   const elementSigninPage = signinPage.getContent();
-  const form: HTMLElement | null | undefined =
+  const form: HTMLFormElement | null | undefined =
     elementSigninPage?.querySelector('#signinForm');
   const formValidatorSignin = form ? new FormValidator(form, submit) : null;
   if (formValidatorSignin) {

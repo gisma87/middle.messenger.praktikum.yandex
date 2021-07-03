@@ -115,16 +115,12 @@ export class LoginPage extends Block {
 const loginPage = new LoginPage(loginProps, setValidator);
 
 function submit(obj: { [key: string]: string }) {
-  console.log('запускаю userApi.authorization');
   userApi
     .authorization(obj.login, obj.password)
     .then(res => {
       const status = (res as { [key: string]: any }).status;
-      const response = (res as { response: any }).response;
-      console.log('res: ', res);
-      console.log('res.response: ', response);
+
       if (status === 200 || status === 400) {
-        console.log('res.status: ', status);
         if (status === 200) {
           historyPush('/chat');
           userApi.getUserInfo();

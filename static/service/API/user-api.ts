@@ -71,7 +71,6 @@ class UserApi {
       } else {
         userData.avatar = this.store.state.userInfo.avatar;
       }
-      console.log('userData: ', userData);
       this.store.dispatch(mutationsEnum.setUserInfo, userData);
     }
   }

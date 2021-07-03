@@ -48,8 +48,9 @@ class Chats extends Block {
     this.popups = this.setPopup();
 
     if (prevProps.store?.state?.activeChat && prevState.activeChat) {
-      const isEqualProps = this.props.store?.state?.activeChat?.toString() === prevState.activeChat.toString()
       const activeChatId = this.props.store?.state?.activeChat
+      const isEqualProps = activeChatId?.toString() === prevState.activeChat.toString()
+
       if (!isEqualProps && activeChatId) {
         chatApi.getChatUsers(activeChatId)
           .then(response => {
@@ -62,7 +63,6 @@ class Chats extends Block {
 
   scrollToBottomChatBlock() {
     const messageBlock = document.querySelector('.messageBlock__content')
-    console.log('messageBlock: ', messageBlock)
     if(messageBlock) messageBlock.scrollTo(0, messageBlock?.scrollHeight);
   }
 }
@@ -80,7 +80,6 @@ function submit(data: { [key: string]: string }) {
   const key = Object.keys(data)?.[0];
   switch (key) {
     case 'createChat':
-      console.log('createChat: ', data);
       chatApi
         .createNewChat({title: data[key]})
         .then(res => {
@@ -92,7 +91,6 @@ function submit(data: { [key: string]: string }) {
         .catch(e => console.log(e));
       break;
     case 'loginAdd':
-      console.log('loginAdd: ', data);
       chatApi.searchUserByLogin(data[key])
         .then(res => {
           if ((res as Response).status === 200) {
@@ -154,7 +152,6 @@ function submit(data: { [key: string]: string }) {
 }
 
 function setActiveChat(event: Event) {
-  console.log('ACTIVE_CHAT: ID ', (<HTMLInputElement>event.target).value);
   store.dispatch(
     mutationsEnum.setActiveChat,
     (<HTMLInputElement>event.target).value,
@@ -221,19 +218,5 @@ function setValidator() {
     if (formValidator) formValidator.setEventListeners();
   });
 }
-
-// function getChat() {
-//     chatApi.getChats()
-//         .then(res => {
-//             const status = (res as { [key: string]: any }).status;
-//             const response = JSON.parse((res as { response: any }).response);
-//             if (status === 200) {
-//                 store.dispatch(mutationsEnum.setChats, response)
-//             } else {
-//                 console.log('Ошибка при запросе: ', status)
-//             }
-//         })
-//         .catch(e => console.log('Ошибка при запросе: ', e))
-// }
 
 export {chats};
