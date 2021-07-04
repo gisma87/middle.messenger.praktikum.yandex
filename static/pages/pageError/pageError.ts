@@ -1,4 +1,5 @@
-import { Block, Iprops } from '../../service/block';
+import { Block, Iprops } from '../../service/Block/block';
+import { historyPush } from '../../service/utils';
 import { errorTmpl } from './pageError.tmpl';
 
 const dataError500 = { text: 'Мы уже фиксим', title: '500' };
@@ -56,17 +57,9 @@ class PageError500 extends Block {
 
 const pageError500 = new PageError500(propsPageError);
 
-function historyPush(url: string = '/'): void {
-  window.history.pushState('', '', url);
-  window.history.pushState('', '', url);
-  window.history.replaceState('', '', url);
-  window.history.back();
-  window.history.forward();
-}
-
 const historyPushPageError500 = (event: Event) => {
   event.preventDefault();
-  historyPush();
+  historyPush('/');
 };
 
 pageError500.addListener(

@@ -242,6 +242,7 @@
   flex-direction: column;
   min-width: 320px;
   width: 100%;
+  position: relative;
 
   &__header {
     display: flex;
@@ -320,11 +321,10 @@
   }
 
   &__content {
-    position: relative;
     display: flex;
     flex-direction: column;
     padding: 15px;
-    justify-content: flex-end;
+    overflow: auto;
     flex: 1 1;
   }
 
@@ -341,7 +341,7 @@
     position: relative;
     border-radius: 20px;
     background: #f8f8f8;
-    padding: 15px;
+    padding: 15px 20px 20px 15px;
     max-width: 410px;
     align-self: flex-start;
   }
@@ -432,8 +432,9 @@
 }
 
 .popupSetting {
-  top: 7px;
-  right: 7px;
+  top: 60px;
+  right: 17px;
+  z-index: 5;
 
   &__item {
     padding: 10px 0;
@@ -456,8 +457,9 @@
 }
 
 .popupAttach {
-  bottom: 7px;
-  left: 7px;
+  bottom: 55px;
+  left: 38px;
+  z-index: 5;
 
   &__item {
     padding: 10px 0;

@@ -1,4 +1,4 @@
-import {Block, Iprops} from '../../service/block';
+import {Block, Iprops} from '../../service/Block/block';
 import {Popup} from '../../service/popup';
 import {FormValidator} from '../../service/formValidator';
 import {chatApi} from '../../service/API/chat-api';
@@ -8,6 +8,7 @@ import {historyPush} from '../../service/utils';
 import store from '../../store/index';
 import {mutationsEnum} from '../../store/mutations';
 import {stateType} from "../../store/typeStore";
+import {webSocketApi} from "../../service/API/webSocket-api";
 
 const chatProps = () => {
   return {
@@ -28,10 +29,7 @@ class Chats extends Block {
 
   constructor(getProps: () => Iprops, setPopup: () => Popup) {
     super(getProps);
-    this.callbackAfterRender = this.props.callbackAfterRender
-      ? this.props.callbackAfterRender
-      : () => {
-      };
+    this.callbackAfterRender = this.props.callbackAfterRender || (() => {});
     this.setPopup = setPopup;
   }
 
@@ -40,8 +38,9 @@ class Chats extends Block {
     this.popups = this.setPopup();
 
     if (!store.state.chatsList?.length) {
-      chatApi.getChats()
+      chatApi.getChats();
     }
+    this.scrollToBottomChatBlock();
   }
 
   componentDidUpdate(prevProps: Iprops, prevState: stateType) {
@@ -49,8 +48,9 @@ class Chats extends Block {
     this.popups = this.setPopup();
 
     if (prevProps.store?.state?.activeChat && prevState.activeChat) {
-      const isEqualProps = this.props.store?.state?.activeChat?.toString() === prevState.activeChat.toString()
       const activeChatId = this.props.store?.state?.activeChat
+      const isEqualProps = activeChatId?.toString() === prevState.activeChat.toString()
+
       if (!isEqualProps && activeChatId) {
         chatApi.getChatUsers(activeChatId)
           .then(response => {
@@ -58,6 +58,12 @@ class Chats extends Block {
           })
       }
     }
+    this.scrollToBottomChatBlock()
+  }
+
+  scrollToBottomChatBlock() {
+    const messageBlock = document.querySelector('.messageBlock__content')
+    if(messageBlock) messageBlock.scrollTo(0, messageBlock?.scrollHeight);
   }
 }
 
@@ -74,7 +80,6 @@ function submit(data: { [key: string]: string }) {
   const key = Object.keys(data)?.[0];
   switch (key) {
     case 'createChat':
-      console.log('createChat: ', data);
       chatApi
         .createNewChat({title: data[key]})
         .then(res => {
@@ -86,7 +91,6 @@ function submit(data: { [key: string]: string }) {
         .catch(e => console.log(e));
       break;
     case 'loginAdd':
-      console.log('loginAdd: ', data);
       chatApi.searchUserByLogin(data[key])
         .then(res => {
           if ((res as Response).status === 200) {
@@ -138,6 +142,9 @@ function submit(data: { [key: string]: string }) {
       //     })
       //     .catch(e => console.log(e))
       break;
+    case 'message':
+      if(store.state?.activeChat) webSocketApi.send({message: data.message, chatID: store.state?.activeChat});
+      break;
     default:
       console.log(data);
       console.log("обработчик submit'а в разработке...");
@@ -145,7 +152,6 @@ function submit(data: { [key: string]: string }) {
 }
 
 function setActiveChat(event: Event) {
-  console.log('ACTIVE_CHAT: ID ', (<HTMLInputElement>event.target).value);
   store.dispatch(
     mutationsEnum.setActiveChat,
     (<HTMLInputElement>event.target).value,
@@ -212,19 +218,5 @@ function setValidator() {
     if (formValidator) formValidator.setEventListeners();
   });
 }
-
-// function getChat() {
-//     chatApi.getChats()
-//         .then(res => {
-//             const status = (res as { [key: string]: any }).status;
-//             const response = JSON.parse((res as { response: any }).response);
-//             if (status === 200) {
-//                 store.dispatch(mutationsEnum.setChats, response)
-//             } else {
-//                 console.log('Ошибка при запросе: ', status)
-//             }
-//         })
-//         .catch(e => console.log('Ошибка при запросе: ', e))
-// }
 
 export {chats};

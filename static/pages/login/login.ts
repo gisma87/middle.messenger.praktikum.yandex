@@ -1,4 +1,4 @@
-import { Block, Iprops } from '../../service/block';
+import { Block, Iprops } from '../../service/Block/block';
 import { FormValidator } from '../../service/formValidator';
 import { userApi } from '../../index';
 import { loginBlock } from './login.tmpl';
@@ -115,16 +115,12 @@ export class LoginPage extends Block {
 const loginPage = new LoginPage(loginProps, setValidator);
 
 function submit(obj: { [key: string]: string }) {
-  console.log('запускаю userApi.authorization');
   userApi
     .authorization(obj.login, obj.password)
     .then(res => {
       const status = (res as { [key: string]: any }).status;
-      const response = (res as { response: any }).response;
-      console.log('res: ', res);
-      console.log('res.response: ', response);
-      if (status === (200 || 400)) {
-        console.log('res.status: ', status);
+
+      if (status === 200 || status === 400) {
         if (status === 200) {
           historyPush('/chat');
           userApi.getUserInfo();
@@ -156,7 +152,7 @@ function setValidator() {
   loginPage.addListener('.form__link_signin', 'click', historyPushSignin);
 
   const elementLoginPage = loginPage.getContent();
-  const form: HTMLElement | null | undefined =
+  const form: HTMLFormElement | null | undefined =
     elementLoginPage?.querySelector('#loginForm');
   const formValidatorLogin = form ? new FormValidator(form, submit) : null;
   if (formValidatorLogin) {

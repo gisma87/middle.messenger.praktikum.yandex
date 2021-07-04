@@ -1,4 +1,4 @@
-import { Block, Iprops } from '../../service/block';
+import { Block, Iprops } from '../../service/Block/block';
 import { Popup } from '../../service/popup';
 import { InputTypeFile } from '../../service/InputTypeFile';
 import { FormValidator } from '../../service/formValidator';
@@ -152,8 +152,7 @@ function setValidator() {
         if (status === 200) {
           profile.popups?.removeClassActivePopup();
           userApi.getUserInfo();
-        }
-        if (status !== 200) {
+        } else {
           console.log('Ошибка запроса: ', status);
         }
       })
@@ -189,7 +188,7 @@ function setValidator() {
   new InputTypeFile(propsInputTypeFile);
 
   // валидируем форму с InputTypeFile
-  const form: HTMLElement | null = document.querySelector('#addFileForPhoto');
+  const form: HTMLFormElement | null = document.querySelector('#addFileForPhoto');
   const formValidator = form ? new FormValidator(form, submit) : null;
 
   if (formValidator) {

@@ -14,6 +14,14 @@ export type chatUsers = {
   "role"?: string | null
 }[]
 
+export type messageType = {
+  "content": string,
+  "type": string,
+  "time": string,
+  "user_id": string | number,
+  "id": string | number
+} | messageType[]
+
 export default {
   auth: false,
   userInfo: {
@@ -46,5 +54,6 @@ export default {
       avatar: '',
       role: ''
     }
-  ]
+  ],
+  messageStore: []
 };

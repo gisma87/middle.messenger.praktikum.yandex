@@ -1,10 +1,10 @@
-import { historyPush } from './utils';
+import { historyPush } from '../utils';
 
 function isEqual(lhs: {}, rhs: {}) {
   return lhs === rhs;
 }
 
-type Block = { remove: () => void; render: () => void };
+export type Block = { remove: () => void; render: () => void };
 
 class Route {
   _pathname: string;

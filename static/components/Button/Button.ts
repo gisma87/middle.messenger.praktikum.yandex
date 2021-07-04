@@ -1,4 +1,4 @@
-import { Block } from '../../service/block';
+import { Block } from '../../service/Block/block';
 
 class Button extends Block {
   static OPTIONS = {

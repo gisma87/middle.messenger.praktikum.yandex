@@ -1,3 +1,4 @@
+
 type PlainObject<T = any> = {
   [k in string]: T;
 };
@@ -49,7 +50,7 @@ const formatValidate = {
       '^[А-ЯЁA-Z]?[а-яёa-z]{2,}(-[А-ЯЁA-Z]?[а-яёa-z]+)*[0-9]{0,}$',
     ),
   },
-  text: { inputName: 'text', regexp: new RegExp('^(.)*?$') },
+  text: {inputName: 'text', regexp: new RegExp('^(.)*?$')},
   mail: {
     inputName: 'email',
     regexp: new RegExp(
@@ -88,4 +89,6 @@ function historyPush(url: string): void {
   window.history.forward();
 }
 
-export { pow, isEqual, formatValidate, errorMessages, historyPush };
+
+
+export {pow, isEqual, formatValidate, errorMessages, historyPush};

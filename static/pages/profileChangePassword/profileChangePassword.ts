@@ -1,4 +1,4 @@
-import { Block, Iprops } from '../../service/block';
+import { Block, Iprops } from '../../service/Block/block';
 import { profileChangePasswordPage } from './constants';
 import { FormValidator } from '../../service/formValidator';
 import { profileChangePasswordTmpl } from './profileChangePassword.tmpl';
@@ -74,7 +74,6 @@ const historyPushChats = (event: Event) => {
 
 function setValidator() {
   function submit(obj: { [key: string]: string }) {
-    console.log('submit changePassword: ', obj);
     userApi
       .changePassword(
         obj as {
@@ -101,7 +100,7 @@ function setValidator() {
   );
 
   const elementChangePassword = profileChangePassword.getContent();
-  const form: HTMLElement | null | undefined =
+  const form: HTMLFormElement | null | undefined =
     elementChangePassword?.querySelector('#formChangePassword');
   const formValidatorChangePassword = form
     ? new FormValidator(form, submit)

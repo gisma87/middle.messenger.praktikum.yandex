@@ -1,9 +1,9 @@
-import { Block, Iprops } from '../../service/block';
-import { FormValidator } from '../../service/formValidator';
-import { profileChangeDataTmpl } from './profileChangeData.tmpl';
-import { profileChangeDataPage } from './constants';
-import { historyPush } from '../../service/utils';
-import { userApi } from '../../index';
+import {Block, Iprops} from '../../service/Block/block';
+import {FormValidator} from '../../service/formValidator';
+import {profileChangeDataTmpl} from './profileChangeData.tmpl';
+import {profileChangeDataPage} from './constants';
+import {historyPush} from '../../service/utils';
+import {userApi} from '../../index';
 
 type profileData = {
   first_name: string;
@@ -55,15 +55,14 @@ const profileChangeData = new ProfileChangeData(propsProfileData, setValidator);
 profileChangeData.addListener('.profile__btnBack', 'click', historyPushChats);
 
 function submit(obj: { [key: string]: string }) {
-  console.log('submit profileData: ', obj);
   userApi.changeProfileData(obj as profileData);
 }
 
 function setValidator(): FormValidator | null {
   const elementChangeData = profileChangeData.getContent();
-  const form: HTMLElement | null | undefined =
+  const form: HTMLFormElement | null | undefined =
     elementChangeData?.querySelector('#formChangeData');
   return form ? new FormValidator(form, submit) : null;
 }
 
-export { profileChangeData };
+export {profileChangeData};

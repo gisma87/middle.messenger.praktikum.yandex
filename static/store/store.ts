@@ -1,8 +1,9 @@
-import eventBus from '../service/eventBus';
+import eventBus from '../service/EventBus/eventBus';
 import { stateType, stateKey } from './typeStore';
 import { mutationsType, mutationsKey } from './mutations';
 import { actionsKey, actionsType } from './actions';
 import cloneDeep from '../service/cloneDeep';
+import { eventsName } from '../constants';
 
 type Params = {
   mutations: mutationsType;
@@ -50,19 +51,15 @@ export default class Store {
     console.groupCollapsed(`ACTION: ${actionKey}, payload: `, payload);
     self.status = 'action';
     self.actions[actionKey](self, payload);
-    const oldState = cloneDeep(self.state);
-    console.log('oldState: ', oldState);
-    // self.events.emit('stateChange', {
-    //   oldState: oldState,
-    //   newState: self.state,
-    // });
+    // const oldState = cloneDeep(self.state);
+    // console.log('oldState: ', oldState);
     console.groupEnd();
 
     return true;
   }
 
   commit(mutationKey: mutationsKey, payload?: any) {
-    console.log('mutation in commit: ', mutationKey, 'payload: ', payload);
+    // console.log('mutation in commit: ', mutationKey, 'payload: ', payload);
     const self = this;
     if (typeof self.mutations[mutationKey] !== 'function') {
       console.log(`Mutation "${mutationKey}" doesn't exist`);
@@ -70,16 +67,16 @@ export default class Store {
     }
     self.status = 'mutation';
     const newState = self.mutations[mutationKey](self.state, payload);
-    console.log('newState: ', newState);
+    // console.log('newState: ', newState);
     const prevState = cloneDeep(self.state);
     self.state = this._makePropsProxy(newState, self);
-    console.log('prevState: ', prevState);
-    console.log('newState: ', newState);
-    self.events.emit('stateChange', {
+    // console.log('prevState: ', prevState);
+    // console.log('newState: ', newState);
+    self.events.emit(eventsName.stateChange, {
       prevState: prevState,
       newState: self.state,
     });
-    console.log('STATE: ', self.state);
+    // console.log('STATE: ', self.state);
 
     return true;
   }
