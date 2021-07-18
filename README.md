@@ -19,7 +19,7 @@
 ### Аккаунты для теста:
 
 login: "arlekin"
-password: "йцу123"
+password: "qwe123"
 
 login: "arlekin2"
 password: "qwe123" ( в нём добавлены чаты и пользователи)
