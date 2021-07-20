@@ -86,7 +86,7 @@ describe('test Router', () => {
     router.go('/test2')
     const findElement = document.querySelector('.test2')
     expect(findElement?.textContent).to.equal('TEST2');
-    assert.equal(findElement?.className.length, 5)
+    assert.equal(findElement?.className.length, 7)
     expect(window.location.pathname).to.equal('/test2')
 
     router.go('/test3')
