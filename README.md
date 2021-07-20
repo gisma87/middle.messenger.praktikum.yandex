@@ -1,4 +1,5 @@
-## [ссылка на сайт](https://admiring-fermat-7d32ca.netlify.app/)
+## [ссылка на сайт на netlify](https://admiring-fermat-7d32ca.netlify.app/)
+## [ссылка на сайт на heroku](https://my-app-sprint4.herokuapp.com/)
  
 
 
