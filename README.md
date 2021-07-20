@@ -1,6 +1,7 @@
-## [ссылка на сайт](https://admiring-fermat-7d32ca.netlify.app/)
+### [ссылка на сайт на netlify](https://admiring-fermat-7d32ca.netlify.app/)
+## [ссылка на сайт на heroku](https://my-app-sprint4.herokuapp.com/chat)
 
-### [ссылка на pull request](https://github.com/gisma87/middle.messenger.praktikum.yandex/pull/3)
+### [ссылка на pull request sprint_4](https://github.com/gisma87/middle.messenger.praktikum.yandex/pull/4)
 
 ## Установка
 
@@ -19,7 +20,7 @@
 ### Аккаунты для теста:
 
 login: "arlekin"
-password: "йцу123"
+password: "qwe123"
 
 login: "arlekin2"
 password: "qwe123" ( в нём добавлены чаты и пользователи)
